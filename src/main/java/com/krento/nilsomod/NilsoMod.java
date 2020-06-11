@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.krento.nilsomod.init.BlockInit;
+import com.krento.nilsomod.world.gen.NilsoOreGen;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,8 @@ public class NilsoMod
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "nilsomod";
     public static NilsoMod instanse;
+    
+    
     
     public NilsoMod() {
     	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -45,6 +48,11 @@ public class NilsoMod
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
 
+    }
+    
+    @SubscribeEvent
+    public void loadCompleteEvent(FMLServerStartingEvent event) {
+    	NilsoOreGen.generateOre();
     }
     
     public static class NilsoItemGroup extends ItemGroup{
